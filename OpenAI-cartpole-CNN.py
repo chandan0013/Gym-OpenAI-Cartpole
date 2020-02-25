@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
 
 import torch
 import torch.nn as nn
@@ -16,9 +14,6 @@ from skopt.space import Real, Integer
 from skopt.utils import use_named_args
 from skopt import gp_minimize
 from skopt.plots import plot_convergence
-
-
-# In[2]:
 
 
 # OpenAI gym
@@ -45,7 +40,6 @@ def main():
         finish_episode_and_update()
 
 
-# In[3]:
 
 
 class Policy(nn.Module):
@@ -76,8 +70,6 @@ optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
 
-# In[4]:
-
 
 from torch.distributions import Categorical
 def select_action(state):
@@ -88,8 +80,6 @@ def select_action(state):
     policy.saved_log_probs.append(m.log_prob(action))
     return action.item()
 
-
-# In[5]:
 
 
 gamma = 0.99 # discount factor
@@ -114,7 +104,6 @@ def finish_episode_and_update():
     del policy.saved_log_probs[:]
 
 
-# In[6]:
 
 
 main()
@@ -124,8 +113,6 @@ plt.ylabel('Reward points ')
 plt.legend(['Episode Rewards'])
 plt.show()
 
-
-# In[ ]:
 
 
 
